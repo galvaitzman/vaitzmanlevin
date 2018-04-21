@@ -2,6 +2,7 @@ package algorithms.search;
 
 public abstract class AState {
 ////// goooooonnniiiiii
+    // gal
     private String state;
     private double cost;
     private AState cameFrom;
