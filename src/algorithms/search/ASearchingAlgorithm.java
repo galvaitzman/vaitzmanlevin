@@ -5,10 +5,14 @@ import java.util.*;
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm
 {
     protected int visitedNodes;
+    protected Map <String,AState> openListMap;
+    protected Map <String,AState> closeListMap;
 
     public ASearchingAlgorithm()
     {
         visitedNodes=0;
+        openListMap = new HashMap<String, AState>();
+        closeListMap = new HashMap<String, AState>();
     }
 
     @Override

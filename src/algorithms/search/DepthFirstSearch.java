@@ -13,22 +13,29 @@ public class DepthFirstSearch extends ASearchingAlgorithm
     @Override
     public Solution solve(ISearchable s) {
         boolean solutionFound = false;
-        openList.add(s.getStartState());
+        AState start = s.getStartState();
+        openList.add(start);
+        openListMap.put(start.getState(),start);
         AState aState = null;
         while (!solutionFound && !openList.isEmpty())
         {
             aState= popOpenList();
+            openListMap.remove(aState.getState());
             if (aState.getState().equals("GOAL"))
                 solutionFound = true;
-            else {
-                ArrayList<AState> as = s.getAllSuccessors(aState);
-                while (!as.isEmpty())
-                    openList.add(as.remove(as.size() - 1));
+            else{
+                ArrayList <AState> allSuccessors = s.getAllSuccessors(aState);
+                while (!allSuccessors.isEmpty()){
+                    AState as = allSuccessors.remove(allSuccessors.size()-1);
+                    if (!closeListMap.containsKey(as.getState()) && !openListMap.containsKey(as.getState()) ){
+                        openList.add(as);
+                        openListMap.put(as.getState(),as);
+                    }
+                }
             }
+            closeListMap.put(aState.getState(),aState);
         }
-        if(!solutionFound)
-            throw new RuntimeException("the solver didn't found the solution");
-
+        if(!solutionFound) throw new RuntimeException("the solver didn't found the solution");
         return generateSolution(aState,s);
     }
 

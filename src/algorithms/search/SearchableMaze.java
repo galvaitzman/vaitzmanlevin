@@ -8,15 +8,15 @@ public class SearchableMaze implements ISearchable {
     private Maze maze;
     private MazeState startState;
     private MazeState goalState;
-    private boolean[][]visitedArray;
+    //private boolean[][]visitedArray;
 
     public SearchableMaze(Maze maze)
     {
         this.maze = maze;
         startState = new MazeState("START", maze.getStartPosition(),null,0);
         goalState = new MazeState("GOAL", maze.getGoalPosition(),null,0);
-        visitedArray = new boolean [maze.getNumOfRows()][maze.getNumOfColumns()];
-        setVisitedArray(maze.getNumOfRows(),maze.getNumOfColumns());
+      //  visitedArray = new boolean [maze.getNumOfRows()][maze.getNumOfColumns()];
+       // setVisitedArray(maze.getNumOfRows(),maze.getNumOfColumns());
     }
     @Override
     public AState getStartState() {
@@ -28,6 +28,7 @@ public class SearchableMaze implements ISearchable {
         return this.goalState;
     }
 
+    /*
     private void setVisitedArray(int rows, int columns)
     {
         for (int i = 0; i < rows; i++){
@@ -35,13 +36,14 @@ public class SearchableMaze implements ISearchable {
                 visitedArray[i][j] = false;
         }
     }
+    */
 
     @Override
     public ArrayList<AState> getAllSuccessors(AState as) {
         MazeState currentState = (MazeState)as;
         int currentRow = currentState.getPosition().getRowIndex();
         int currentColumn =  currentState.getPosition().getColumnIndex();
-        visitedArray[currentRow][currentColumn] = true;
+        //visitedArray[currentRow][currentColumn] = true;
         ArrayList<AState> allSuccessors = new ArrayList<>();
         addAllPossibleSuccessors(currentState,currentRow,currentColumn,allSuccessors);
         return allSuccessors;
@@ -72,27 +74,29 @@ public class SearchableMaze implements ISearchable {
 
     private void addPossibleRegularSuccessor(MazeState currentState,boolean direction, ArrayList<AState>allSuccessors,int wantedRow, int wantedColumn){
         String state = setStateName(wantedRow,wantedColumn);
-        if (direction && !visitedArray[wantedRow][wantedColumn]){
+        if (direction )
+            //&& !visitedArray[wantedRow][wantedColumn]){
             allSuccessors.add(new MazeState(state,new Position(wantedRow,wantedColumn),currentState,10));
-            visitedArray[wantedRow][wantedColumn] = true;
-        }
+            //visitedArray[wantedRow][wantedColumn] = true;
+        //}
 
 
     }
 
     private void addPossibleSlantSuccessor(MazeState currentState,boolean validation, boolean atLeastOneNeighbourIsZero, ArrayList<AState>allSuccessors,int wantedRow, int wantedColumn){
         String state = setStateName(wantedRow,wantedColumn);
-        if (atLeastOneNeighbourIsZero && validation && !visitedArray[wantedRow][wantedColumn] && maze.getValueAt(wantedRow,wantedColumn)==0){
+        if (atLeastOneNeighbourIsZero && validation && maze.getValueAt(wantedRow,wantedColumn)==0 )
+            //&& !visitedArray[wantedRow][wantedColumn] ){
             allSuccessors.add(new MazeState(state, new Position(wantedRow,wantedColumn), currentState,15));
-            visitedArray[wantedRow][wantedColumn] = true;
-        }
+            //visitedArray[wantedRow][wantedColumn] = true;
+        //}
 
     }
 
     private String setStateName(int wantedRow, int wantedColumn){
         if (goalState.getPosition().equals(new Position(wantedRow,wantedColumn)))
             return "GOAL";
-        return "random";
+        return ("{" + wantedRow + "," + wantedColumn + "}");
     }
 
 

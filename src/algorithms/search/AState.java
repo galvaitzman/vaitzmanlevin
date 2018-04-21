@@ -1,7 +1,7 @@
 package algorithms.search;
 
 public abstract class AState {
-עעעע
+
     private String state;
     private double cost;
     private AState cameFrom;
@@ -33,5 +33,12 @@ public abstract class AState {
     public String toString()
     {
         return super.toString();
+    }
+
+    @Override
+    public boolean equals(Object other)
+    {
+        AState a = (AState)other;
+        return (a.getState().equals(this.getState()));
     }
 }

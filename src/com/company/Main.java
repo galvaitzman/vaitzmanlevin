@@ -7,6 +7,8 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+
+
         //testMazeGenerator(new SimpleMazeGenerator());
         long startTime = System.currentTimeMillis();
         testMazeGenerator(new MyMazeGenerator());
@@ -20,8 +22,8 @@ public class Main {
         SearchableMaze searchableMaze = new SearchableMaze(maze);
 
         solveProblem(searchableMaze, new BreadthFirstSearch());
-        //solveProblem(searchableMaze, new DepthFirstSearch());
-        //solveProblem(searchableMaze, new BestFirstSearch());
+        solveProblem(searchableMaze, new DepthFirstSearch());
+        solveProblem(searchableMaze, new BestFirstSearch());
         maze.print();
     }
 
