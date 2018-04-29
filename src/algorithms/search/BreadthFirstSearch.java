@@ -51,6 +51,4 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         visitedNodes += 1;
         return openList.poll();
     }
-
-
 }
