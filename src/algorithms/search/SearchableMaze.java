@@ -39,7 +39,7 @@ public class SearchableMaze implements ISearchable {
     */
 
     @Override
-    public ArrayList<AState> getAllSuccessors(AState as) {
+    public ArrayList<AState> getAllPossibleStates(AState as) {
         MazeState currentState = (MazeState)as;
         int currentRow = currentState.getPosition().getRowIndex();
         int currentColumn =  currentState.getPosition().getColumnIndex();

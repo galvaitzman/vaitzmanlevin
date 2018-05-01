@@ -24,7 +24,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm
             if (aState.getState().equals("GOAL"))
                 solutionFound = true;
             else{
-                ArrayList <AState> allSuccessors = s.getAllSuccessors(aState);
+                ArrayList <AState> allSuccessors = s.getAllPossibleStates(aState);
                 while (!allSuccessors.isEmpty()){
                     AState as = allSuccessors.remove(allSuccessors.size()-1);
                     if (!closeListMap.containsKey(as.getState()) && !openListMap.containsKey(as.getState()) ){

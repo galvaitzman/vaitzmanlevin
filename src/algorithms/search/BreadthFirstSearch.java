@@ -27,7 +27,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
             if (aState.getState().equals("GOAL"))
                 solutionFound = true;
             else{
-                ArrayList <AState> allSuccessors = s.getAllSuccessors(aState);
+                ArrayList <AState> allSuccessors = s.getAllPossibleStates(aState);
                 while (!allSuccessors.isEmpty()){
                     AState as = allSuccessors.remove(0);
                     if (!closeListMap.containsKey(as.getState()) && !openListMap.containsKey(as.getState()) ){
@@ -40,7 +40,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         }
 
         if(!solutionFound)
-            throw new RuntimeException("the solve didn't found the solution ");
+            throw new RuntimeException("The solver didn't found the solution ");
 
         return generateSolution(aState, s);
     }

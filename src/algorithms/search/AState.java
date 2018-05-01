@@ -1,6 +1,9 @@
 package algorithms.search;
 
-public abstract class AState {
+
+import java.util.Comparator;
+
+public abstract class AState{
 
     private String state;
     private double cost;
