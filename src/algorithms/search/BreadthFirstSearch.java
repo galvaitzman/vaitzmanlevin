@@ -15,7 +15,10 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
     @Override
     public Solution solve(ISearchable s)
     {
-        boolean solutionFound=false;
+        if(s == null || s.getStartState() == null || s.getGoalState() == null)
+            return null;
+
+        boolean solutionFound = false;
         AState start = s.getStartState();
         openList.add(start);
         openListMap.put(start.getState(),start);
@@ -40,7 +43,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         }
 
         if(!solutionFound)
-            throw new RuntimeException("The solver didn't found the solution ");
+            return null;
 
         return generateSolution(aState, s);
     }

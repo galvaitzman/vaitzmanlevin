@@ -76,7 +76,7 @@ public class SearchableMaze implements ISearchable {
         String state = setStateName(wantedRow,wantedColumn);
         if (direction )
             //&& !visitedArray[wantedRow][wantedColumn]){
-            allSuccessors.add(new MazeState(state,new Position(wantedRow,wantedColumn),currentState,10));
+            allSuccessors.add(new MazeState(state,new Position(wantedRow,wantedColumn),currentState,currentState.getCost()+10));
             //visitedArray[wantedRow][wantedColumn] = true;
         //}
 
@@ -87,7 +87,7 @@ public class SearchableMaze implements ISearchable {
         String state = setStateName(wantedRow,wantedColumn);
         if (atLeastOneNeighbourIsZero && validation && maze.getValueAt(wantedRow,wantedColumn)==0 )
             //&& !visitedArray[wantedRow][wantedColumn] ){
-            allSuccessors.add(new MazeState(state, new Position(wantedRow,wantedColumn), currentState,15));
+            allSuccessors.add(new MazeState(state, new Position(wantedRow,wantedColumn), currentState,currentState.getCost()+15));
             //visitedArray[wantedRow][wantedColumn] = true;
         //}
 
@@ -96,6 +96,8 @@ public class SearchableMaze implements ISearchable {
     private String setStateName(int wantedRow, int wantedColumn){
         if (goalState.getPosition().equals(new Position(wantedRow,wantedColumn)))
             return "GOAL";
+        else if (startState.getPosition().equals(new Position(wantedRow,wantedColumn)))
+            return "START";
         return ("{" + wantedRow + "," + wantedColumn + "}");
     }
 
